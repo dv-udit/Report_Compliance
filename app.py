@@ -81,7 +81,9 @@ def set_db(attributes):
     for page_name in places:
         # print("\n----------------------------------------------------\n")
         # print(f"\nPage Name- {page_name}\n")
-        st.write(f"\nPage Name- {page_name}\n")
+        st.write(f"\n----------------------\n")
+        st.write(f"\n Page Name- {page_name}\n")
+        st.write(f"\n----------------------\n")
     # print("\n----------------------------------------------------\n")
 
         # attributes = ["CCR or Counterparty credit risk", "                                                                                                                                                       ", "IRC or Incremental Risk Charge", "A-IRB or Advance internal ratings-based Approach",
