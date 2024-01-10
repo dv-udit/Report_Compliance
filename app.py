@@ -158,7 +158,7 @@ def query_form():
         query_text = st.text_area(
             'Step 2: Catalog:', placeholder='Catalog contents')
         submitted = st.form_submit_button(
-            'Sumit', disabled=(query_text == ""))
+            'Submit')
         if submitted:
             with st.spinner('Generating...'):
                 # generate_response(query_text, filename)
