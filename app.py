@@ -61,7 +61,7 @@ def set_db(attributes):
                                  persist_directory="/tmp/brcl_03", collection_metadata={"hnsw:space": "cosine"})
     places = set([doc.metadata["page_name"] for doc in documents])
     # places = set({'LIQB', 'OV1', 'CR8', 'CONTENTS', 'Catalog', 'CCR7', 'MR2-B', 'LIQ1', 'KM1'})
-    places.remove("Catalog")
+    # places.remove("Catalog")
 
     prompt = PromptTemplate(template="""
     You are an intelligent bot, who does not hallucinate. Answer in following format:
@@ -87,7 +87,7 @@ def set_db(attributes):
         # attributes = ["CCR or Counterparty credit risk", "                                                                                                                                                       ", "IRC or Incremental Risk Charge", "A-IRB or Advance internal ratings-based Approach",
         #               "SREP or Supervisory Review and Evaluation Process", "TURF or Total Unduplicated Reach and Frequency", "LCR or Liquidity Coverage Ratio", "HLBA or historical look-back approach", "RWEA"]
 
-        for query in attributes[:2]:
+        for query in attributes:
             retriever = db.as_retriever(search_type="mmr",
                                         search_kwargs={'filter': {
                                             'page_name': page_name}, 'k': 3}
@@ -118,9 +118,9 @@ def file_upload_form():
     with st.form('fileform'):
         supported_file_types = ["xlsx"]
         uploaded_file = st.file_uploader(
-            "Upload Your Report file", type=(supported_file_types))
+            "Step 1: Upload Your Report file (xlsx)", type=(supported_file_types))
         # st.write(uploaded_file)
-        submitted = st.form_submit_button("Submit")
+        submitted = st.form_submit_button("Upload")
         # st.write(uploaded_file.path)
         if submitted:
             if uploaded_file is not None:
@@ -154,9 +154,9 @@ def file_upload_form():
 def query_form():
     with st.form('myform'):
         query_text = st.text_area(
-            'Enter your question:', placeholder='Enter your question here')
+            'Step 2: Catalog:', placeholder='Catalog contents')
         submitted = st.form_submit_button(
-            'Submit', disabled=(query_text == ""))
+            'Sumit', disabled=(query_text == ""))
         if submitted:
             with st.spinner('Generating...'):
                 # generate_response(query_text, filename)
