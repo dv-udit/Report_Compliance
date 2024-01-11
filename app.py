@@ -195,7 +195,7 @@ def query_form():
                     attribute_name, description = i.split(',', 1)
                     attribute_name = f'"{attribute_name.strip()}"'
                     description = f'"{description.strip()}"'
-                    dict = {"attribute_name" : attribute_name, "description" : description}
+                    dict = {"attribute_name" : attribute_name, "attribute_description" : description}
                     attributes_dict.append(dict)
                     
                 for i in attributes_dict:
