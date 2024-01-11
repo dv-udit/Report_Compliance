@@ -77,7 +77,6 @@ def set_db(attributes):
     {context}
     ---
 """, input_variables=["context"])
-
     for page_name in places:
         # print("\n----------------------------------------------------\n")
         # print(f"\nPage Name- {page_name}\n")
@@ -100,11 +99,31 @@ def set_db(attributes):
                                                 retriever=retriever,
                                                 chain_type_kwargs={"prompt": prompt})
 
-            response = chain({'query': query})
+            # response = chain({'query': query})
+            response = chain({'query': query['attribute_name']})
+            # print(response)
+            output = {}
+            # output = {
+            #         page_name : {
+            #             "attribute" : response['query'],
+            #             "response" :response['result']    
+            #         }
+            #     }
+            
+            output = {"attribute" : response['query'] , "response" : response['result']}
+    #       print('response>>>>>>',response)
+        #   print("\n----------------------------------------------------\n")
+            # st.write("Page Name - ",output['page_name'])
+            # st.write("Attribute : \n",output[page_name]["attribute"],"\n")
+            # st.write("Response : \n",output[page_name]["response"],"\n")
+
+            st.write("Attribute : \n",output["attribute"],"\n")
+            st.write("Response : \n",output["response"],"\n")
+            
             # print(f"{response['query']}")
             # print(f"{response['result']}")
-            st.write(f"{response['query']}")
-            st.write(f"{response['result']}")
+            # st.write(f"{response['query']}")
+            # st.write(f"{response['result']}")
             # print("\n\n\n\n")
 
 
@@ -168,8 +187,17 @@ def query_form():
                 #     st.write("Answer : " + i["answer"])
                 # lines_array = query_text.splitlines()
                 text_array = query_text.split('\n')
-
-                set_db(text_array)
+                attributes_dict = []
+                for i in text_array:
+                    attribute_name, description = i.split(',', 1)
+                    attribute_name = f'"{attribute_name.strip()}"'
+                    description = f'"{description.strip()}"'
+                    dict = {"attribute_name" : attribute_name, "description" : description}
+                    attributes_dict.append(dict)
+                    
+                for i in attributes_dict:
+                    print(i)
+                set_db(attributes_dict)
 
                 # st.write(type(lines_array))
                 # st.write(type(query_text))
