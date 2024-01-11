@@ -100,7 +100,10 @@ def set_db(attributes):
                                                 chain_type_kwargs={"prompt": prompt})
 
             # response = chain({'query': query})
-            response = chain({'query': query['attribute_name']})
+            attribute_name = query['attribute_name']
+            attribute_description = query['attribute_description']
+            query = f"'{attribute_name}' or '{attribute_description}'"
+            response = chain({'query': query})
             # print(response)
             output = {}
             # output = {
