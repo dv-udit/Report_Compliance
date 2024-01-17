@@ -118,7 +118,7 @@ def save_uploaded_file(uploadedfile):
     file_name = uploadedfile.name
     current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
     final_filename = current_datetime + file_name
-    st.write(final_filename)
+    # st.write(final_filename)
     st.session_state.file_name = final_filename
     with open(os.path.join("test", final_filename), "wb") as f:
         f.write(uploadedfile.getbuffer())
