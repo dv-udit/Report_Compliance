@@ -87,7 +87,7 @@ Document text is specified between the quotes:
     # for page_name in ["LIQB"]:
         retriever = db.as_retriever(search_type="mmr",
                                     search_kwargs={'filter': {
-                                        'page_name': page_name}, 'k': 5}
+                                        'page_name': page_name}, 'k': 1}
                                     )
         llm = OpenAI(temperature=0,model_name = 'gpt-4')  # model_name="text-davinci-003"
         chain = RetrievalQA.from_chain_type(llm=llm,
