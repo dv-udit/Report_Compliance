@@ -7,13 +7,14 @@ from langchain import OpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 import time
+import subprocess
 import os
 import streamlit as st
 import sys
 __import__('pysqlite3')
 
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-
+result = subprocess.run("pip install openai==0.28", shell=True, stdout=subprocess.PIPE, text=True)
 
 st.title('🦜🔗 Report Compliance')
 
