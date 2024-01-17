@@ -6,6 +6,8 @@ from langchain_community.document_loaders import UnstructuredExcelLoader
 from langchain import OpenAI
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
+from datetime import datetime
+
 import time
 import subprocess
 import os
@@ -14,7 +16,6 @@ import sys
 __import__('pysqlite3')
 
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-# subprocess.run("pip install openai==0.28", shell=True, stdout=subprocess.PIPE, text=True)
 
 st.title('🦜🔗 Report Compliance')
 
@@ -115,10 +116,14 @@ Document text is specified between the quotes:
 
 def save_uploaded_file(uploadedfile):
     file_name = uploadedfile.name
-    st.session_state.file_name = file_name
-    with open(os.path.join("test", uploadedfile.name), "wb") as f:
+    current_datetime = datetime.now().strftime("%Y-%m-%d %H-%M-%S")
+    final_filename = current_datetime + file_name
+    st.write(final_filename)
+    st.session_state.file_name = final_filename
+    with open(os.path.join("test", final_filename), "wb") as f:
         f.write(uploadedfile.getbuffer())
-    return st.success("Saved file :{} in tempDir".format(uploadedfile.name))
+    # return st.success("Saved file :{} in tempDir".format(uploadedfile.name))
+    return st.success("Saved file :{} in tempDir".format(final_filename))
 
 
 def file_upload_form():
@@ -166,7 +171,9 @@ def query_form():
             'Submit')
         if submitted:
             with st.spinner('Generating...'):
-                text_array = query_text.split('\n')
+                # text_array = query_text.split('\n')
+                # print(type(text_array))
+                text_array = query_text.strip().split('\n')
                 attributes_dict = []
                 for i in text_array:
                     attribute_name, description = i.split(',', 1)
@@ -175,8 +182,8 @@ def query_form():
                     dict = {"attribute_name" : attribute_name, "attribute_description" : description}
                     attributes_dict.append(dict)
                     
-                for i in attributes_dict:
-                    print(i)
+                # for i in attributes_dict:
+                #     print(i)
                 set_db(attributes_dict)
 
 file_upload_form()
