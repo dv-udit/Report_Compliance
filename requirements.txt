@@ -2,7 +2,7 @@ chromadb
 langchain
 langchain-community
 langchain-openai
-openai
+openai==0.28
 sentence-transformers
 unstructured
 openpyxl
