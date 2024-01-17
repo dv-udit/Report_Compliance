@@ -1,8 +1,8 @@
+openai==0.28
 chromadb
 langchain
 langchain-community
 langchain-openai
-openai==0.28
 sentence-transformers
 unstructured
 openpyxl
