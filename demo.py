@@ -10,9 +10,9 @@ import time
 import os
 import streamlit as st
 import sys
-# __import__('pysqlite3')
+__import__('pysqlite3')
 
-# sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 
 st.title('🦜🔗 Report Compliance')
