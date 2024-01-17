@@ -1,5 +1,6 @@
 chromadb
 langchain
+tiktoken
 langchain-community
 sentence-transformers
 unstructured
