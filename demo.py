@@ -14,7 +14,7 @@ import sys
 __import__('pysqlite3')
 
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-subprocess.run("pip install openai==0.28", shell=True, stdout=subprocess.PIPE, text=True)
+# subprocess.run("pip install openai==0.28", shell=True, stdout=subprocess.PIPE, text=True)
 
 st.title('🦜🔗 Report Compliance')
 
